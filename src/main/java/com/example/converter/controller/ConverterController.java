@@ -13,15 +13,23 @@ public class ConverterController {
 
     @GetMapping("/convert/XRPtoXMR/{XRP}")
     public String convertXRPtoXMR(@PathVariable(name = "XRP") String XRPvalue) {
-        double[] rates = rp.getRates();
-        double value = Double.parseDouble(XRPvalue) * rates[0];
-        return XRPvalue + " XRP = " + String.format("%.8f", value / rates[1]) + " XMR";
+        try {
+            double[] rates = rp.getRates();
+            double value = Double.parseDouble(XRPvalue) * rates[0];
+            return XRPvalue + " XRP = " + String.format("%.8f", value / rates[1]) + " XMR";
+        } catch (NumberFormatException e) {
+            return "Only numbers are valid";
+        }
     }
 
     @GetMapping("/convert/XMRtoXRP/{XMR}")
     public String convertXMRtoXRP(@PathVariable(name = "XMR") String XMRvalue) {
-        double[] rates = rp.getRates();
-        double value = Double.parseDouble(XMRvalue) * rates[1];
-        return XMRvalue + " XMR = " + String.format("%.8f", value / rates[0]) + " XRP";
+        try {
+            double[] rates = rp.getRates();
+            double value = Double.parseDouble(XMRvalue) * rates[1];
+            return XMRvalue + " XMR = " + String.format("%.8f", value / rates[0]) + " XRP";
+        } catch (NumberFormatException e) {
+            return "Only numbers are valid";
+        }
     }
 }
