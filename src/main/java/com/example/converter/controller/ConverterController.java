@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/converter")
 public class ConverterController {
 
+    private final RateParser rp = new RateParser();
+
     @GetMapping("/convert/XRPtoXMR/{XRP}")
     public String convertXRPtoXMR(@PathVariable(name = "XRP") String XRPvalue) {
-        double rate0 = 10;
-        double rate1 = 5;
-        double value = Double.parseDouble(XRPvalue) * rate0;
-        return XRPvalue + " XRP = " + String.format("%.8f", value / rate1) + " XMR";
+        double[] rates = rp.getRates();
+        double value = Double.parseDouble(XRPvalue) * rates[0];
+        return XRPvalue + " XRP = " + String.format("%.8f", value / rates[1]) + " XMR";
     }
 
     @GetMapping("/convert/XMRtoXRP/{XMR}")
     public String convertXMRtoXRP(@PathVariable(name = "XMR") String XMRvalue) {
-        double rate0 = 10;
-        double rate1 = 5;
-        double value = Double.parseDouble(XMRvalue) * rate1;
-        return XMRvalue + " XMR = " + String.format("%.8f", value / rate0) + " XRP";
+        double[] rates = rp.getRates();
+        double value = Double.parseDouble(XMRvalue) * rates[1];
+        return XMRvalue + " XMR = " + String.format("%.8f", value / rates[0]) + " XRP";
     }
 }
