@@ -1,3 +1,7 @@
+```main:```
+![badge](https://github.com/Prodocc/Software_Engineering/actions/workflows/gradle-test.yml/badge.svg?branch=main)
+```developer:```
+![badge](https://github.com/Prodocc/Software_Engineering/actions/workflows/gradle-test.yml/badge.svg?branch=developer)
 # Конвертер
 ____
 Небольшой сервис, для конвертирования криптовалютЫ.
